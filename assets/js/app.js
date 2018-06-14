@@ -1,8 +1,9 @@
+
 var gifArray = [];
 
 function displayGifs() {
     var x = $(this).data("search");
-    console.log(animal);
+    console.log(x);
     var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + x + "&api_key=dc6zaTOxFJmzC&limit=10";
     console.log("inside");
     //ajax request
@@ -15,19 +16,23 @@ function displayGifs() {
         for (i = 0; i < results.length; i++) {
             
             var rating = results[i].rating;
+            var animalDiv = $("<div class='col-md-4'>");
             //var animated = results[i].images.fixed_height;
             //var image = results[i].url;
             
             
-            var imageUrl = results[i].images.fixed_height.url;
-            
-
+            var still = results[i].images.fixed_height_still.url;
+            var animated = results[i].images.fixed_height.url;
+            var state = still;
             // Creating and storing an image tag
             var image = $("<img>");
-  
+            var p = $("<p>").text("Rating: " + rating);
             // Setting the Image src attribute to imageUrl
-            image.attr("src", imageUrl);
+            image.attr("src", still);
             image.attr("alt", "image");
+            image.attr("data-animate", animated);
+            animalDiv.append(p);
+            //images.append(image);
   
             // Prepending the Image to the images div
             $("#images").prepend(image);
@@ -35,9 +40,11 @@ function displayGifs() {
     });
 }
 
-$("#addAnimal").on("click", function (event) {
+$(".btn").on("click", function (event) {
+    console.log('adding');
     event.preventDefault();
-    var newSearch = $("#Input").val();
+    var newSearch = $(".form-control").val();
+    console.log(newSearch);
     gifArray.push(newSearch);
     console.log(gifArray);
     $("#Input").val("");
@@ -45,13 +52,14 @@ $("#addAnimal").on("click", function (event) {
 });
 
 function displayButtons() {
-    $("#data-animal").empty();
+    console.log('adding2');
+    $("animal-buttons").empty();
     for (var i = 0; i < gifArray.length; i++) {
         var a = $("<button>");
         a.attr("id", "animal");
         a.attr("data-search", gifArray[i]);
         a.text(gifArray[i]);
-        $("#data-animal").append(a);
+        $("#animal-buttons").append(a);
     }
 }
 
