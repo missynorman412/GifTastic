@@ -1,33 +1,36 @@
 var gifArray = [];
-console.log("here");
-function displayGifs() {
-    var animal = $(this).data("search");
-    console.log(animal);
-    var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + animal + "&api_key=dc6zaTOxFJmzC&limit=10";
 
+function displayGifs() {
+    var x = $(this).data("search");
+    console.log(animal);
+    var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + x + "&api_key=dc6zaTOxFJmzC&limit=10";
+    console.log("inside");
     //ajax request
     $.ajax({
         url: queryURL,
         method: "GET"
-
-    }).done(function (response) {
+     }).done(function (response) {
         var results = response.data;
         console.log(results);
-        var i = 0;
         for (i = 0; i < results.length; i++) {
-            var gifDiv = $("<div>");
+            
             var rating = results[i].rating;
-            var animated = results[i].images.fixed_height_url;
-            var still = results[i].images.fixed_height_url;
+            //var animated = results[i].images.fixed_height;
+            //var image = results[i].url;
+            
+            
+            var imageUrl = results[i].images.fixed_height.url;
+            
 
+            // Creating and storing an image tag
             var image = $("<img>");
-            var p = $("<p>").text("Rating: " + rating);
-            image.attr("src", still)
-            image.addClass("Giphy");
-            image.attr("data-state", still);
-            image.attr("data-inimate", animated);
-            gifDiv.append(image);
-            $("#gifArea").prepend(gifDiv);  
+  
+            // Setting the Image src attribute to imageUrl
+            image.attr("src", imageUrl);
+            image.attr("alt", "image");
+  
+            // Prepending the Image to the images div
+            $("#images").prepend(image);
         }
     });
 }
