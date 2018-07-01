@@ -4,33 +4,29 @@
 <head>
     <meta charset="utf-8">
     <title>Giphy</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
 </head>
 
 <body>
-    <nav class="navbar navbar-dark bg-dark">
+        <nav class="navbar navbar-dark bg-dark">
         <span class="navbar-brand mb=0 h1">Giphy Animal Search</span>
-
         <form class="form-inline" id="Search">
             <label for="Input" id="instructions">Search for animals</label>
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" area-label="Search id=" Input ">
-            <button class="btn " type="submit " id="addAnimal ">Search</button>
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" id="Input">
+            <button class="btn " type="submit " id="addAnimal">Search</button>
         </form>
     </div>
     <div class="container ">
         <div class="row ">
-            <div class="btn-group">
-            
+            <div id="animal-buttons">
                 <button class="btn" id="animal" data-search="cat">cat</button>
                 <button class="btn" id="animal" data-search="dog">dog</button>
                 <button class="btn" id="animal" data-search="skunk">skunk</button>
-            <div id="myButtons"></div>
             </div>
         </div>
+    </div>
     </div>  
-    <div id="animal-buttons"></div>
-
-
-
     <div class="container">
         <div class="row ">
             <span>
@@ -38,11 +34,7 @@
             </span>
         </div>
     </div>
-
-
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js "></script>
     <script src="assets/js/app.js "></script>
 </body>
-
 </html>

@@ -1,17 +1,19 @@
 var gifArray = [];
+
 function displayGifs() {
     var x = $(this).data("search");
     console.log(x);
     var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + x + "&api_key=dc6zaTOxFJmzC&limit=10";
-    //console.log("inside");
+    console.log("inside");
     //ajax request
     $.ajax({
         url: queryURL,
         method: "GET"
-    }).done(function (response) {
+     }).done(function (response) {
         var results = response.data;
-        //console.log(results);
+        console.log(results);
         for (i = 0; i < results.length; i++) {
+            
             var rating = results[i].rating;
             var animalDiv = $("<div class='col-md-4'>");
             var still = results[i].images.fixed_height_still.url;
@@ -24,55 +26,51 @@ function displayGifs() {
             image.attr("data-still", still);
             image.attr("alt", "image");
             image.attr("data-animate", animated);
-            image.addClass(".Giphy");
+            image.addClass("Giphy");
             animalDiv.append(p);
             //images.append(image);
+  
             // Prepending the Image to the images div
             $("#images").prepend(image);
         }
     });
 }
-$("#addAnimal").on("click", function (event) {
+
+$(".btn").on("click", function (event) {
     event.preventDefault();
-    $("#animal-buttons").remove();
     var newSearch = $(".form-control").val().trim();
-    console.log(newSearch);
-    if (newSearch != "") {
-        gifArray.push(newSearch);
-    }
-    newSearch = "";
+    gifArray.push(newSearch);
     $("#Input").val("");
     displayButtons();
 });
 
 function displayButtons() {
-    console.log(gifArray)
     for (var i = 0; i < gifArray.length; i++) {
         
+        if (gifArray[i] != "") {
             var a = $("<button>");
             a.attr("id", "animal");
-            a.addClass(".btn-primary");
+            //a.addClass(".btn-primary");
             a.addClass(".btn");
             a.addClass(".Giphy");
             a.attr("data-search", gifArray[i]);
             a.text(gifArray[i]);
-            $("#animal-buttons").append(a);
+            $("#animal").append(a);
             a.attr("data-state", "still");
-        
+        }
     }
 }
 
 displayButtons();
-
 $(document).on("click", "#animal", displayGifs);
-
 $(document).on("click", ".Giphy", pausePlayGifs);
 
 function pausePlayGifs() {
-    console.log("Entered");
+    
     var state = $(this).attr("data-state");
     console.log(state);
     if (state === "still") {
+    
         //this is supposed to animate gifs that are still
         $(this).attr("src", $(this).attr("data-animate"));
         $(this).attr("data-state", "animate");
@@ -82,5 +80,3 @@ function pausePlayGifs() {
         $(this).attr("data-state", "still");
     }
 }
-
-
