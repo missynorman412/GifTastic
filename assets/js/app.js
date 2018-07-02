@@ -1,4 +1,4 @@
-var gifArray = [];
+var gifArray = ["cat", "dog", "skunk"];
 function displayGifs() {
     var x = $(this).data("search");
     console.log(x);
@@ -24,7 +24,7 @@ function displayGifs() {
             image.attr("data-still", still);
             image.attr("alt", "image");
             image.attr("data-animate", animated);
-            image.addClass(".Giphy");
+            image.addClass("Giphy");
             animalDiv.append(p);
             //images.append(image);
             // Prepending the Image to the images div
@@ -34,7 +34,7 @@ function displayGifs() {
 }
 $("#addAnimal").on("click", function (event) {
     event.preventDefault();
-    $("#animal-buttons").remove();
+    $("#animal-buttons").empty();
     var newSearch = $(".form-control").val().trim();
     console.log(newSearch);
     if (newSearch != "") {
@@ -53,12 +53,10 @@ function displayButtons() {
             a.attr("id", "animal");
             a.addClass(".btn-primary");
             a.addClass(".btn");
-            a.addClass(".Giphy");
             a.attr("data-search", gifArray[i]);
             a.text(gifArray[i]);
             $("#animal-buttons").append(a);
-            a.attr("data-state", "still");
-        
+            
     }
 }
 
